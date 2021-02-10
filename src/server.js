@@ -33,7 +33,7 @@ app.get('/', (req, res) => {
         .catch(err => {
             console.log(err.message);
         })
-  })
+})
 
 app.get("/posts/new", function(req,res){
     return res.render("posts-new")
