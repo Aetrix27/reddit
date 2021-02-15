@@ -4,8 +4,8 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node src/server.js"
+    "start": "node src/server.js",
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
@@ -26,5 +26,10 @@
     "handlebars": "^4.7.6",
     "mongodb": "^3.6.4",
     "mongoose": "^5.11.15"
+  },
+  "devDependencies": {
+    "chai": "^4.3.0",
+    "chai-http": "^4.3.0",
+    "mocha": "^8.3.0"
   }
 }

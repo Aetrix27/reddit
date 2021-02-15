@@ -40,6 +40,7 @@ app.get("/posts/new", function(req,res){
 })
 
 require('./controllers/posts.js')(app);
+require('./controllers/comments.js')(app);
 
 // Start Server
 app.listen(port, () => {
