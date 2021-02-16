@@ -1,7 +1,11 @@
+require('dotenv').config();
 const path = require("path");
 const express = require('express');
 const exphbs  = require('express-handlebars');
+var cookieParser = require('cookie-parser');
+const jwt = require('jsonwebtoken');
 const app = express();
+//var app = express();
 
 const bodyParser = require('body-parser');
 const expressValidator = require('express-validator');
@@ -15,6 +19,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 // Add after body parser initialization!
 app.use(expressValidator());
+app.use(cookieParser());
 
 app.engine('handlebars', exphbs({
     layoutsDir: __dirname + '/views/layouts',
@@ -41,6 +46,7 @@ app.get("/posts/new", function(req,res){
 
 require('./controllers/posts.js')(app);
 require('./controllers/comments.js')(app);
+require('./controllers/auth.js')(app);
 
 // Start Server
 app.listen(port, () => {
