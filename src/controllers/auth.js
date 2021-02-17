@@ -21,16 +21,14 @@ module.exports = (app) => {
   
   // SIGN UP FORM
   app.get("/sign-up", (req, res) => {
-    var currentUser = req.user;
     
-    res.render("sign-up", { currentUser });
+    res.render("sign-up");
   });
 
   // LOGIN FORM
   app.get('/login', (req, res) => {
-    var currentUser = req.user;
     
-    res.render("login", { currentUser });
+    res.render("login");
   });
 
   // LOGIN
@@ -70,18 +68,23 @@ app.post("/login", (req, res) => {
     res.redirect('/');
   });
 
-  // SIGN UP POST
-  app.post("/sign-up", (req, res) => {
-    // Create User
+   // SIGN UP POST
+   app.post("/sign-up", (req, res) => {
+    // Create User and JsonWebToken
     const user = new User(req.body);
 
-    user.save().then((user) => {
-      var token = jwt.sign({ _id: user._id }, process.env.SECRET, { expiresIn: "60 days" });
-      res.cookie('nToken', token, { maxAge: 900000, httpOnly: true });
-      res.redirect('/');
-    })
-    .catch(err => {
-      console.log(err.message);
-    });
-  });
+    user
+      .save()
+      .then(user => {
+        var token = jwt.sign({ _id: user._id }, process.env.SECRET, { expiresIn: "60 days" });
+        res.cookie('nToken', token, { maxAge: 900000 , httpOnly: true });
+        // console.log("new sign-up token: " + token)
+        res.redirect("/");
+      })
+      .catch(err => {
+        console.log(err.message);
+        return res.status(400).send({ err: err });
+      });
+});
+
   }
