@@ -1,14 +1,16 @@
+var cookieParser = require('cookie-parser');
+const jwt = require('jsonwebtoken');
 require('dotenv').config();
 const path = require("path");
 const express = require('express');
 const exphbs  = require('express-handlebars');
-var cookieParser = require('cookie-parser');
-const jwt = require('jsonwebtoken');
 const app = express();
 //var app = express();
 
+app.use(cookieParser());
 const bodyParser = require('body-parser');
 const expressValidator = require('express-validator');
+
 // Set db
 require('./data/reddit-db');
 port = 3000
@@ -19,7 +21,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 // Add after body parser initialization!
 app.use(expressValidator());
-app.use(cookieParser());
 
 var checkAuth = (req, res, next) => {
     console.log("Checking authentication");
@@ -46,6 +47,7 @@ app.set('view engine', 'handlebars');
 require('./controllers/posts.js')(app);
 require('./controllers/comments.js')(app);
 require('./controllers/auth.js')(app);
+require('./controllers/replies.js')(app);
 
 // Start Server
 app.listen(port, () => {

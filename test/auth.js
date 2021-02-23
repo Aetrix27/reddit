@@ -16,14 +16,10 @@ describe("User", function() {
       res.status.should.be.equal(401);
       done();
     });
-
-    after(function () {
-        agent.close()
-      });
   });
 
-  // signup
-it("should be able to signup", function(done) {
+    // signup
+  it("should be able to signup", function(done) {
     User.findOneAndRemove({ username: "testone" }, function() {
       agent
         .post("/sign-up")
@@ -35,37 +31,10 @@ it("should be able to signup", function(done) {
           done();
         });
     });
-    after(function () {
-        agent.close()
-      });
+
   });
 
-    // login
-  it("should be able to login", function(done) {
-    agent
-      .post("/login")
-      .send({ username: "testone", password: "password" })
-      .end(function(err, res) {
-        res.should.have.status(200);
-        agent.should.have.cookie("nToken");
-        done();
-      });
-      after(function () {
-        agent.close()
-      });
+  after(function () {
+    agent.close()
   });
-
-  // logout
-  it("should be able to logout", function(done) {
-    agent.get("/logout").end(function(err, res) {
-      res.should.have.status(200);
-      agent.should.not.have.cookie("nToken");
-      done();
-    });
-    after(function () {
-      agent.close()
-    });
-  });
-
-
 });

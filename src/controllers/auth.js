@@ -21,6 +21,7 @@ module.exports = (app) => {
   
   // SIGN UP FORM
   app.get("/sign-up", (req, res) => {
+    //var currentUser
     
     res.render("sign-up");
   });
@@ -55,6 +56,7 @@ app.post("/login", (req, res) => {
         // Set a cookie and redirect to root
         res.cookie("nToken", token, { maxAge: 900000, httpOnly: true });
         res.redirect("/");
+        console.log("Token created")
       });
     })
     .catch(err => {
@@ -73,9 +75,7 @@ app.post("/login", (req, res) => {
     // Create User and JsonWebToken
     const user = new User(req.body);
 
-    user
-      .save()
-      .then(user => {
+    user.save().then(user => {
         var token = jwt.sign({ _id: user._id }, process.env.SECRET, { expiresIn: "60 days" });
         res.cookie('nToken', token, { maxAge: 900000 , httpOnly: true });
         // console.log("new sign-up token: " + token)
