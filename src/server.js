@@ -8,6 +8,8 @@ const app = express();
 //var app = express();
 
 app.use(cookieParser());
+app.use(express.static('public'));
+
 const bodyParser = require('body-parser');
 const expressValidator = require('express-validator');
 
@@ -40,9 +42,9 @@ app.engine('handlebars', exphbs({
     layoutsDir: __dirname + '/views/layouts',
     defaultLayout: 'main'
 }));
+
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'handlebars');
-
 
 require('./controllers/posts.js')(app);
 require('./controllers/comments.js')(app);

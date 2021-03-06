@@ -13,14 +13,20 @@
   <body>
     <!-- Nav -->
 
-    <nav class="navbar navbar-default">
-      <h1 href="/" class="text-primary">Reddit.js </h1>
+    <nav class="navbar navbar-expand-lg navbar-light">
+      <h3 href="/" class="text-primary">Reddit.js </h3>
 
-       <div class="navbar-nav">
+      <div class="navbar-nav">
       {{#if currentUser}}
-        <a href="/posts/new" class="btn btn-primary navbar-btn">New Post</a>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a href="/posts/new" class="nav-link text-primary">New Post</a>
+      </li>
+    </ul>
       {{/if}}
-        </div>
+      </div>
     </nav>
        
      <ul class="nav navbar-nav navbar-right">
@@ -42,5 +48,8 @@
         crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+      <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+      <script rel="script" src="/js/posts.js"></script>
   </body>
 </html>
